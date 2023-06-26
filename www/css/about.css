@@ -1,0 +1,114 @@
+:root {
+    --fontTxt: "Montserrat", sans-serif;
+    --txtClr: rgba(22, 22, 22, 0.85);
+    --h1BgClr: rgba(39, 77, 78, 0.7);
+    --h1Clr: #dadada;
+    --bgClr: rgba(255, 255, 255, 0.75);
+    --linear1: #ffdde1;
+    --linear2: #ee9ca7;
+}
+
+body {
+    color: var(--txtClr);
+    font-family: var(--fontTxt);
+    margin: 0;
+}
+
+footer {
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    /* fallback for old browsers */
+    background: var(--BgClr);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(65deg, var(--linear1), var(--linear2));
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(65deg, var(--linear1), var(--linear2));
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+}
+
+.main .main-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    max-width: 100vw;
+}
+
+.main .main-container .main-container-inner {
+    max-width: 400px;
+    height: 100%;
+}
+
+@media screen and (min-width: 680px) {
+    .main .main-container .main-container-inner {
+        box-sizing: border-box;
+        display: flex;
+        margin: 0;
+        padding: 10px;
+        width: 100vw;
+        min-width: 750px;
+        position: relative;
+    }
+}
+
+.main .main-container .main-container-inner ._inner-container {
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    padding: 15px;
+    overflow: hidden;
+    z-index: 2;
+}
+
+main.mainSection {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+main.mainSection div.mainSection-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    height: 100%;
+}
+
+main.mainSection div.mainSection-container h1 {
+    border-bottom: 1px solid var(--txtClr);
+    color: var(--txtClr);
+    padding: 12px;
+    text-align: center;
+    /* width: 720px; */
+}
+
+main.mainSection div.mainSection-container div.mainSection-container_box {
+    background: var(--bgClr);
+    border-radius: 8px;
+    margin: 20px 0;
+    padding: 0;
+}
+
+
+main.mainSection div.mainSection-container div.mainSection-container_box p {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    padding: 5px 15px;
+}

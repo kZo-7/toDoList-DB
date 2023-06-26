@@ -1,0 +1,35 @@
+<%- include("header") %>
+<!--Import Custom CSS-->
+<link rel="stylesheet" href="css/toDoList.css">
+
+</head>
+<body>
+    <div class="main">
+        <div class="main-container">
+            <div class="main-container-inner">
+                <div class="_inner-container">
+                    <main class="mainSection">
+                        <div class="mainSection-container">
+                            <h1 class="mainSection-container_h1">
+                                <%= listTitle %>
+                            </h1>
+                            <div class="mainSection-container_box">
+                                <% for (let i=0; i<newListTasks.length; i++) { %>
+                                    <div class="_box-task">
+                                        <input type="checkbox">
+                                        <p>
+                                            <%= newListTasks[i] %>
+                                        </p>
+                                    </div>
+                                <% } %>
+                            </div>
+                            <form class="mainSection-container_form" action="/" method="post">
+                                <input type="text" name="newTask" placeholder="Add a new task..">
+                                <div class="spacer"></div>
+                                <button type="submit" name="list" value="<%= listTitle %>"> + </button>
+                            </form>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        <%- include("footer") %>
