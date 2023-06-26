@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.1"
+  },
+  "name": "todolist-db",
+  "description": "A toDoList web application. Your faithfull ally for scheduling, tracking and completing your daily tasks.",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kZo",
+  "license": "ISC"
+}
