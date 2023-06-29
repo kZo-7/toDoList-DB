@@ -14,20 +14,26 @@
                                 <%= listTitle %>
                             </h1>
                             <div class="mainSection-container_box">
-                                <% for (let i=0; i<newListTasks.length; i++) { %>
+                            <% newListTasks.forEach(task => { %>
                                     <div class="_box-task">
-                                        <input type="checkbox">
-                                        <p>
-                                            <%= newListTasks[i] %>
-                                        </p>
+
+                                        <form class="_box-task-form" action="/delete" method="post">
+                                            <input type="checkbox" name="checkbox" value="<%= task._id %>" onchange="this.form.submit()">
+                                            <p>
+                                            <%= task.name %>
+                                            </p>
+                                        </form>
+
                                     </div>
-                                <% } %>
+                            <%  }); %>
                             </div>
+
                             <form class="mainSection-container_form" action="/" method="post">
                                 <input type="text" name="newTask" placeholder="Add a new task..">
                                 <div class="spacer"></div>
                                 <button type="submit" name="list" value="<%= listTitle %>"> + </button>
                             </form>
+                            
                         </div>
                     </main>
                 </div>

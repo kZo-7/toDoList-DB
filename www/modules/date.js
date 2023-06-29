@@ -1,19 +1,11 @@
-// modules for getting Date or Day
+//create a custom module for returning the current date
 exports.getDate = () => {
     const today = new Date();
     const options = {
-        weekday: "long",
-        day: "numeric",
+        weekday: "short",
+        day: "2-digit",
         month: "long"
+        
     };
     return today.toLocaleDateString("en-us", options);
 }
-
-
-// exports.getDay = () => {
-//     const today = new Date();
-//     const options = {
-//         weekday: "long"
-//     };
-//     return today.toLocaleDateString("en-us", options);
-// }

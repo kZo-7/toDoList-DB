@@ -112,16 +112,17 @@ main.mainSection div.mainSection-container div.mainSection-container_box div._bo
     padding: 0 20px;
 }
 
-main.mainSection div.mainSection-container div.mainSection-container_box div._box-task input:checked+p {
+main.mainSection div.mainSection-container div.mainSection-container_box div._box-task form._box-task-form input:checked+p {
     text-decoration: line-through;
     text-decoration-color: var(--h1BgClr);
 }
 
-main.mainSection div.mainSection-container div.mainSection-container_box div._box-task input[type="checkbox"] {
+main.mainSection div.mainSection-container div.mainSection-container_box div._box-task form._box-task-form input[type="checkbox"] {
     margin: 10px;
 }
 
-main.mainSection div.mainSection-container div.mainSection-container_box div._box-task p {
+main.mainSection div.mainSection-container div.mainSection-container_box div._box-task form._box-task-form p {
+    display: inline;
     font-size: 16px;
     font-weight: 400;
     margin: 0;
