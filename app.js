@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const path = require("path");
+const { log } = require("console");
 
 //setting up the express app
 const app = express();
@@ -58,10 +59,15 @@ app.get("/", (req, res) => {
                     });
                 res.redirect("/");
             } else {
-                res.render("toDoList", {
-                    listTitle: "Daily Tasks",
-                    newListTasks: foundTasks
-                });
+                List.find()
+                    .then(allLists => {
+                        res.render("toDoList", {
+                            listTitle: "Daily Tasks",
+                            newListTasks: foundTasks,
+                            savedLists: allLists
+                        });
+                    })
+                    .catch(err => { console.log("NOT savedLISTS. Error is: " + err) });
             }
         })
         .catch((err) => {
@@ -75,7 +81,7 @@ app.get("/about", (req, res) => {
 
 app.get("/:customListName", (req, res) => {
     const customListName = req.params.customListName;
-    
+
     List.findOne({ name: customListName })
         .then(foundList => {
             if (!foundList) { //if list does not exist, we create it
@@ -88,19 +94,14 @@ app.get("/:customListName", (req, res) => {
             } else { //if it exists, then render it
                 //find all list documents and render them to let user knowing the active lists
                 List.find()
-                .then(allLists => {
-                    // console.log("Size of allLists[] = "+allLists.length);
-                    // allLists.forEach(el => {
-                    //     console.log(el.name);
-                    //     // activeLists.push[el.name];
-                    // });
-                    res.render("toDoList", {
-                        listTitle: foundList.name,
-                        newListTasks: foundList.tasks,
-                        savedLists: allLists
-                    });
-                })
-                .catch(err => { console.log("NOT savedLISTS. Error is: " + err) });
+                    .then(allLists => {
+                        res.render("toDoList", {
+                            listTitle: foundList.name,
+                            newListTasks: foundList.tasks,
+                            savedLists: allLists
+                        });
+                    })
+                    .catch(err => { console.log("NOT savedLISTS. Error is: " + err) });
             }
         })
         .catch(err => {
@@ -136,17 +137,29 @@ app.post("/", (req, res) => {
 
 app.post("/delete", (req, res) => {
     const checkedTaskID = req.body.checkbox;
+    const listName = req.body.listName;
 
-    //Deleting the checked task from DB
-    Task.findByIdAndDelete(checkedTaskID)
-        .then(() => {
-            console.log(`Succesfully deleted the checked task!`);
-            res.redirect("/");
-        })
-        .catch(err => {
-            console.log(`Could not deleted the checked task from DB. Error is: ${err}`);
-            res.redirect("/");
-        });
+    //Deleting the checked task from default list    
+    if (listName === "Daily Tasks") {
+        Task.findByIdAndDelete(checkedTaskID)
+            .then(() => {
+                console.log(`Succesfully deleted the task with id= "${checkedTaskID}".`);
+                res.redirect("/");
+            })
+            .catch(err => {
+                console.log(`Could not deleted the checked task from DB. Error is: ${err}`);
+                res.redirect("/");
+            });
+    } else { //Deleting the checked task from custom list
+        List.findOneAndUpdate({ name: listName }, {$pull: {tasks: {_id: checkedTaskID}}})
+            .then(() => {
+                console.log(`Succesfully deleted the task with id= "${checkedTaskID}" from list "${listName}".`);
+                res.redirect("/" + listName);
+            })
+            .catch(err => {
+                console.log(`Something bad occured while updating the custom list. No deleted docs. Error is: ${err}`);
+            });
+    }
 });
 
 app.listen(3000, () => {

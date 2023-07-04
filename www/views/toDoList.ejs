@@ -1,41 +1,60 @@
 <%- include("header") %>
-<!--Import Custom CSS-->
-<link rel="stylesheet" href="css/toDoList.css">
+    <!--Import Custom CSS-->
+    <link rel="stylesheet" href="css/toDoList.css">
 
-</head>
-<body>
-    <div class="main">
-        <div class="main-container">
-            <div class="main-container-inner">
-                <div class="_inner-container">
-                    <main class="mainSection">
-                        <div class="mainSection-container">
-                            <h1 class="mainSection-container_h1">
-                                <%= listTitle %>
-                            </h1>
-                            <div class="mainSection-container_box">
-                            <% newListTasks.forEach(task => { %>
-                                    <div class="_box-task">
+    </head>
 
-                                        <form class="_box-task-form" action="/delete" method="post">
-                                            <input type="checkbox" name="checkbox" value="<%= task._id %>" onchange="this.form.submit()">
-                                            <p>
-                                            <%= task.name %>
-                                            </p>
-                                        </form>
+    <body>
+        <div class="main">
+            <div class="main-container">
+                <div class="main-container-inner">
+                    <div class="_inner-container">
+                        <main class="mainSection">
+                            <div class="mainSection-container">
+                                <h1 class="mainSection-container_h1">
+                                    <%= listTitle %>
+                                </h1>
+                                <div class="mainSection-container_box">
+                                    <% newListTasks.forEach(task=> { %>
+                                        <div class="_box-task">
+                                            <!--FORM-->
+                                            <form class="_box-task-form" action="/delete" method="post">
+                                                <input type="checkbox" name="checkbox" value="<%= task._id %>"
+                                                    onchange="this.form.submit()" />
+                                                <p>
+                                                    <%= task.name %>
+                                                </p>
+                                                <input type="hidden" name="listName" value="<%= listTitle %>" />
+                                            </form>
 
-                                    </div>
-                            <%  }); %>
+                                        </div>
+                                        <% }); %>
+                                </div>
+                                <!--FORM-->
+                                <form class="mainSection-container_form" action="/" method="post">
+                                    <input type="text" name="newTask" placeholder="Add a new task.." />
+                                    <div class="spacer"></div>
+                                    <button type="submit" name="list" value="<%= listTitle %>"> + </button>
+                                </form>
                             </div>
-
-                            <form class="mainSection-container_form" action="/" method="post">
-                                <input type="text" name="newTask" placeholder="Add a new task..">
-                                <div class="spacer"></div>
-                                <button type="submit" name="list" value="<%= listTitle %>"> + </button>
-                            </form>
-                            
+                        </main>
+                        <div class="_inner-container_activeLists">
+                            <div class="_activeLists-container">
+                                <div class="_activeLists-container-title">
+                                    <p>Your Lists</p>
+                                </div>
+                                <div class="_activeLists-container-listNames">
+                                    <% savedLists.forEach(allLists=> { %>
+                                        <li class="_activeLists-container-listNames-li">
+                                            <a class="_activeLists-container-listNames-li_a"
+                                                href="/<%= allLists.name %>">
+                                                -<%= allLists.name %>
+                                            </a>
+                                        </li>
+                                        <% }) %>
+                                </div>
+                            </div>
                         </div>
-                    </main>
+                    </div>
                 </div>
-            </div>
-        <%- include("footer") %>
+                <%- include("footer") %>
