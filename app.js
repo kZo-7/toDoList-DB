@@ -4,10 +4,19 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const path = require("path");
-const { log } = require("console");
+
+//we have to hide API keys or passwords to a hidden file to be safe
+require("dotenv").config(
+    {
+        path:__dirname + '/.env'
+    }
+);
 
 //setting up the express app
 const app = express();
+
+const port = process.env.PORT || process.env.DEV_PORT;
+const pwdAdmin = process.env.ADMIN_PWD;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("www"));
@@ -18,7 +27,7 @@ app.set("view engine", "ejs");
 
 //MongoDB -> Connections, Schemas, Models & Documents
 //create a new database into mongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
+mongoose.connect(`mongodb+srv://admin-kZo:${pwdAdmin}@cluster0.1cfhjos.mongodb.net/todolistDB`);
 
 //SCHEMAS
 const tasksSchema = new mongoose.Schema({
@@ -162,6 +171,6 @@ app.post("/delete", (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log("Server started on port 3000");
+app.listen(port, () => {
+    console.log("Server started on port " + port);
 });
