@@ -16,7 +16,7 @@ require("dotenv").config(
 const app = express();
 
 const port = process.env.PORT || process.env.DEV_PORT;
-const pwdAdmin = process.env.ADMIN_PWD;
+const mongoURI = process.env.MONGO_URI;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("www"));
@@ -27,7 +27,7 @@ app.set("view engine", "ejs");
 
 //MongoDB -> Connections, Schemas, Models & Documents
 //create a new database into mongoDB
-mongoose.connect(`mongodb+srv://admin-kZo:${pwdAdmin}@cluster0.1cfhjos.mongodb.net/todolistDB`);
+mongoose.connect(`${mongoURI}/todolistDB`);
 
 //SCHEMAS
 const tasksSchema = new mongoose.Schema({
