@@ -9,7 +9,7 @@
   "name": "todolist-db",
   "description": "A toDoList web application. Your faithfull ally for scheduling, tracking and completing your daily tasks.",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
