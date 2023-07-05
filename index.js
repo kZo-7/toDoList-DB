@@ -27,7 +27,7 @@ app.set("view engine", "ejs");
 
 //MongoDB -> Connections, Schemas, Models & Documents
 //create a new database into mongoDB
-mongoose.connect(mongoURI);
+mongoose.connect(`${mongoURI}`);
 
 //SCHEMAS
 const tasksSchema = new mongoose.Schema({
